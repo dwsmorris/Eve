@@ -4,7 +4,8 @@
     "isShellCommand": true,
     "tasks": [{
         "args": ["/c",
-            "npm", "install"
+            "npm", "install", "&&",
+            "node", "${workspaceRoot}/build/scripts/build-dist.js"
         ],
         "taskName": "build",
         "suppressTaskName": true,
