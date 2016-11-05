@@ -54,6 +54,18 @@ app.get("/build/examples.js", (request, response) => {
   response.end(`var examples = ${JSON.stringify(files)}`);
 });
 
+
+app.get("/edit", (request, response) => {
+  let url = request['_parsedUrl'].pathname + "/index.html";
+  fs.stat("." + url, (err, result) => {
+    if(err) {
+      return serverDatabase.handleHttpRequest(request, response);
+    }
+    response.setHeader("Content-Type", `${contentTypes[path.extname(url)]}; charset=utf-8`);
+    response.end(fs.readFileSync("." + url));
+  });
+});
+
 app.get("*", (request, response) => {
   let url = request['_parsedUrl'].pathname;
   if(url === "/" || url.indexOf(".eve") > -1) {
