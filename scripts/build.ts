@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as glob from "glob";
 import {packageExamples} from "./package-examples";
+import {packageApp} from "./package-app";
 
 export function onError(err) {
   throw err;
@@ -76,6 +77,7 @@ export function build(callback:() => void) {
 
   // Package examples.
   packageExamples(tracker.track("package examples"));
+  packageApp(tracker.track("package app description"));
 
   tracker.finishedStartingTasks();
 }
