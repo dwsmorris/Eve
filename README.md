@@ -1,3 +1,8 @@
+## Development branch modifications
+
+- The editor displays only one eve file - stored in examples/app.eve
+- A <i>save/download code</i> button is displayed at the top of the editor. Clicking this updates the local version stored in examples/app.eve
+
 <p align="center">
   <img src="http://www.witheve.com/logo.png" alt="Eve logo" width="10%" />
 </p>
