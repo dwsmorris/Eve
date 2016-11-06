@@ -373,7 +373,7 @@ class Navigator {
 
   header():Elem {
     let type = this.currentType();
-    return {c: "navigator-header", children: [
+    return {c: "navigator-header"/*, children: [
       {c: "controls", children: [
         this.open ? {c: `up-btn flex-row`, click: this.navigate, children: [
           {c:  `up-btn ion-android-arrow-up ${(type === "folder") ? "disabled" : ""}`},
@@ -383,7 +383,7 @@ class Navigator {
         {c: `${this.open ? "expand-btn" : "collapse-btn"} ion-ios-arrow-back`, click: this.togglePane},
       ]},
       this.ide.inspecting ? this.inspectorControls() : {c: "inspector-controls"},
-    ]};
+    ]*/};
   }
 
   render():Elem {
