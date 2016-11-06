@@ -393,7 +393,7 @@ _ide.onLoadFile = (ide, documentId, code) => {
     socket.send(JSON.stringify({scope: "root", type: "parse", code}))
     socket.send(JSON.stringify({type: "eval", persist: false}));
   }
-  history.pushState({}, "", location.pathname + `#/examples/${documentId}` + location.search);
+  //history.pushState({}, "", location.pathname + `#/examples/${documentId}` + location.search);
   analyticsEvent("load-document", documentId);
 }
 
@@ -411,7 +411,7 @@ function initializeIDE() {
 
 function changeDocument() {
   if(socket.readyState == 1) {
-    let docId = "quickstart.eve";
+    let docId = "app.eve";
     let path = location.hash.split('?')[0].split("#/")[1];
     console.warn(location.hash);
     if(path) {
