@@ -64,6 +64,9 @@ app.get("*", (request, response) => {
   });
 });
 
+app.post("/edit", (request, response) => {
+  var i =0;
+});
 
 app.post("*", (request, response) => {
   return serverDatabase.handleHttpRequest(request, response);

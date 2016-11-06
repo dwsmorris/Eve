@@ -8,6 +8,10 @@ import * as Spans from "./ide/spans";
 
 import {activeElements} from "./renderer";
 import {send, sendEvent, indexes} from "./client";
+import * as browser from "./runtime/browser";
+
+declare var $: any;
+
 
 //---------------------------------------------------------
 // Navigator
@@ -1702,6 +1706,10 @@ export class Editor {
     else if(this.ide.inspecting) inspectorButton.c += " inspecting";
 
     return {c: "flex-row controls", children: [
+      {c: "ion-code-download", title: "Save", click: () => {
+        $.post("/edit", JSON.stringify({
+        code: browser.responder.lastParse.code
+      }))}},
       {c: "ion-refresh", title: "Reset (⌃⇧⏎ or ⇧⌘⏎ )", click: () => this.ide.eval(false)},
       {c: "ion-ios-play", title: "Run (⌃⏎ or ⌘⏎)", click: () => this.ide.eval(true)},
       inspectorButton
