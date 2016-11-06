@@ -39,22 +39,6 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get("/build/examples.js", (request, response) => {
-  let files = {};
-  for(let file of fs.readdirSync("examples/")) {
-    if(path.extname(file) === ".eve") {
-      try {
-        files[file] = fs.readFileSync(path.join("examples", file)).toString();
-      } catch(err) {}
-    }
-  }
-
-  fs.writeFileSync("build/examples.js", `var examples = ${JSON.stringify(files)}`)
-  response.setHeader("Content-Type", `application/javascript; charset=utf-8`);
-  response.end(`var examples = ${JSON.stringify(files)}`);
-});
-
-
 app.get("/edit", (request, response) => {
   let url = request['_parsedUrl'].pathname + "/index.html";
   fs.stat("." + url, (err, result) => {
