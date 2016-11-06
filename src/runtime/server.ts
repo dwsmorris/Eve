@@ -65,7 +65,8 @@ app.get("*", (request, response) => {
 });
 
 app.post("/edit", (request, response) => {
-  var i =0;
+  fs.writeFileSync("examples/app.eve", request.body.code);
+  response.sendStatus(200);
 });
 
 app.post("*", (request, response) => {

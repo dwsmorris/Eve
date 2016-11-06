@@ -1706,10 +1706,9 @@ export class Editor {
     else if(this.ide.inspecting) inspectorButton.c += " inspecting";
 
     return {c: "flex-row controls", children: [
-      {c: "ion-code-download", title: "Save", click: () => {
-        $.post("/edit", JSON.stringify({
+      {c: "ion-code-download", title: "Save", click: () => $.post("/edit", {
         code: browser.responder.lastParse.code
-      }))}},
+      })},
       {c: "ion-refresh", title: "Reset (⌃⇧⏎ or ⇧⌘⏎ )", click: () => this.ide.eval(false)},
       {c: "ion-ios-play", title: "Run (⌃⏎ or ⌘⏎)", click: () => this.ide.eval(true)},
       inspectorButton
