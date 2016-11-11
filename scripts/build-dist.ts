@@ -34,7 +34,7 @@ export function buildDist(callback:() => void) {
     copy("./build/examples.js", "./dist/build/examples.js", tracker.track("copy packaged examples"));
 
 
-    for(let pattern of ["build/src/**/*.js", "build/src/**/*.js.map", "src/**/*.css", "css/**/*.css", "examples/**/*.css"]) {
+    for(let pattern of ["build/src/**/*.js", "build/src/**/*.js.map", "build/scripts/**/*.js", "build/scripts/**/*.js.map", "src/**/*.css", "css/**/*.css", "examples/**/*.css"]) {
       let matches = glob.sync(pattern);
       for(let match of matches) {
         let pathname = match.split("/").slice(0, -1).join("/");
