@@ -15,6 +15,7 @@ import {PersistedDatabase} from "./databases/persisted";
 import {HttpDatabase} from "./databases/node/http";
 import {ServerDatabase} from "./databases/node/server";
 import {RuntimeClient} from "./runtimeClient";
+import {buildDist} from "../../scripts/build-dist";
 
 //---------------------------------------------------------------------
 // Constants
@@ -137,7 +138,8 @@ function initWebsocket(wss) {
             fs.writeFileSync("." + data.path, data.code);
           }
         });
-
+      } else if(data.type === "build"){
+        buildDist(() => {});
       } else {
         client.handleEvent(message);
       }

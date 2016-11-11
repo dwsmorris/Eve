@@ -1711,6 +1711,7 @@ export class Editor {
     else if(this.ide.inspecting) inspectorButton.c += " inspecting";
 
     return {c: "flex-row controls", children: [
+      {c: "ion-settings", title: "Build", click: () => client.sendControl(JSON.stringify({type: "build", example: this.ide.documentId}))},
       {c: "ion-refresh", title: "Reset (⌃⇧⏎ or ⇧⌘⏎ )", click: () => this.ide.eval(false)},
       {c: "ion-ios-play", title: "Run (⌃⏎ or ⌘⏎)", click: () => this.ide.eval(true)},
       inspectorButton

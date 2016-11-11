@@ -18,7 +18,7 @@ const ANALYTICS = `
     </script>
 `;
 
-function buildDist(callback:() => void) {
+export function buildDist(callback:() => void) {
   let tracker = new Tracker(callback);
   build(() => {
     mkdirp.sync("dist/build");
