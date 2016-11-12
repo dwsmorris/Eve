@@ -32,9 +32,11 @@ export function buildExampleDist(callback:() => void) {
 
     //copy("./index.html", "./dist/index.html", tracker.track("copy index"));
     copy("./build/examples.js", "./dist/build/examples.js", tracker.track("copy packaged examples"));
+    copy("./heroku/composer.json", "./dist/composer.json", tracker.track("copy Heroku composer file"));
+    copy("./heroku/Procfile", "./dist/Procfile", tracker.track("copy Heroku Procfile"));
 
-
-    for(let pattern of ["build/src/**/*.js", "build/src/**/*.js.map", "build/scripts/**/*.js", "build/scripts/**/*.js.map", "src/**/*.css", "css/**/*.css", "examples/**/*.*"]) {
+    for(let pattern of ["build/src/**/*.js", "build/src/**/*.js.map", "build/scripts/**/*.js", "build/scripts/**/*.js.map", 
+                        "src/**/*.css", "css/**/*.css", "examples/**/*.*", "fonts/**/*.*", "package.json"]) {
       let matches = glob.sync(pattern);
       for(let match of matches) {
         let pathname = match.split("/").slice(0, -1).join("/");
