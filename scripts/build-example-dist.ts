@@ -4,7 +4,7 @@ import * as mkdirp from "mkdirp";
 import {build, Tracker, copy, onError} from "./build";
 
 // Privacy minded? Feel free to flip this off. We just use it to determine anonymous usage patterns to find hangups and unanticipated workflows.
-const ENABLE_ANALYTICS = true;
+const ENABLE_ANALYTICS = false;
 const ANALYTICS_TOKEN = "<!-- PRODUCTION ANALYTICS -->";
 const ANALYTICS = `
     <script>
@@ -18,7 +18,7 @@ const ANALYTICS = `
     </script>
 `;
 
-function buildDist(callback:() => void) {
+export function buildExampleDist(callback:() => void) {
   let tracker = new Tracker(callback);
   build(() => {
     mkdirp.sync("dist/build");
@@ -34,7 +34,7 @@ function buildDist(callback:() => void) {
     copy("./build/examples.js", "./dist/build/examples.js", tracker.track("copy packaged examples"));
 
 
-    for(let pattern of ["build/src/**/*.js", "build/src/**/*.js.map", "build/scripts/**/*.js", "build/scripts/**/*.js.map", "src/**/*.css", "css/**/*.css", "examples/**/*.css"]) {
+    for(let pattern of ["build/src/**/*.js", "build/src/**/*.js.map", "build/scripts/**/*.js", "build/scripts/**/*.js.map", "src/**/*.css", "css/**/*.css", "examples/**/*.*"]) {
       let matches = glob.sync(pattern);
       for(let match of matches) {
         let pathname = match.split("/").slice(0, -1).join("/");
@@ -49,8 +49,8 @@ function buildDist(callback:() => void) {
 }
 
 if(require.main === module) {
-  console.log("Building distribution folder...")
-  buildDist(() => {
+  console.log("Building example distribution folder...")
+  buildExampleDist(() => {
     console.log("done!")
   });
 }

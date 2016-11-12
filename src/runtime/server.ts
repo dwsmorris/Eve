@@ -15,7 +15,7 @@ import {PersistedDatabase} from "./databases/persisted";
 import {HttpDatabase} from "./databases/node/http";
 import {ServerDatabase} from "./databases/node/server";
 import {RuntimeClient} from "./runtimeClient";
-import {buildDist} from "../../scripts/build-dist";
+import {buildExampleDist} from "../../scripts/build-example-dist";
 
 //---------------------------------------------------------------------
 // Constants
@@ -139,7 +139,7 @@ function initWebsocket(wss) {
           }
         });
       } else if(data.type === "build"){
-        buildDist(() => {});
+        buildExampleDist(() => {});
       } else {
         client.handleEvent(message);
       }
