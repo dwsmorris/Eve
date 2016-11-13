@@ -18,6 +18,9 @@ const ANALYTICS = `
     </script>
 `;
 
+const IDE_HIDING_TOKEN = "/* IDE HIDING */";
+const IDE_HIDING = ".ide-root {display: none}";
+
 export function buildExampleDist(examplePath, callback:() => void) {
   let tracker = new Tracker(callback);
   build(() => {
@@ -28,6 +31,7 @@ export function buildExampleDist(examplePath, callback:() => void) {
     if(ENABLE_ANALYTICS) {
       index = index.replace(ANALYTICS_TOKEN, ANALYTICS);
     }
+    index = index.replace(IDE_HIDING_TOKEN, IDE_HIDING);
     fs.writeFileSync("./dist/index.html", index);
 
     fs.writeFileSync("./dist/.env", "EVE_FILE=" + examplePath);
