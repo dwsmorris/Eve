@@ -465,8 +465,6 @@ function onHashChange(event) {
       return {id: uuid(), key: k, value: v};
     });
 
-    console.log(JSON.stringify({tag: "url-change", "hash-segment": segments, "query-param": queries}));
-
     client.sendEvent([
       {tag: "url-change", "hash-segment": segments, "query-param": queries}
     ]);
