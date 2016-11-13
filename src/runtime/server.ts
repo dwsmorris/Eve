@@ -141,7 +141,9 @@ function initWebsocket(wss) {
           }
         });
       } else if(data.type === "build"){
-        buildExampleDist(() => {});
+        buildExampleDist(data.examplePath, () => {
+          console.log("done!");
+        });
       } else {
         client.handleEvent(message);
       }

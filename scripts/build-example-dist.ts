@@ -18,7 +18,7 @@ const ANALYTICS = `
     </script>
 `;
 
-export function buildExampleDist(callback:() => void) {
+export function buildExampleDist(examplePath, callback:() => void) {
   let tracker = new Tracker(callback);
   build(() => {
     mkdirp.sync("dist/build");
@@ -30,11 +30,12 @@ export function buildExampleDist(callback:() => void) {
     }
     fs.writeFileSync("./dist/index.html", index);
 
-    //copy("./index.html", "./dist/index.html", tracker.track("copy index"));
-    copy("./build/examples.js", "./dist/build/examples.js", tracker.track("copy packaged examples"));
-    copy("./heroku/composer.json", "./dist/composer.json", tracker.track("copy Heroku composer file"));
-    copy("./heroku/Procfile", "./dist/Procfile", tracker.track("copy Heroku Procfile"));
+    fs.writeFileSync("./dist/.env", "EVE_FILE=" + examplePath);
+    fs.writeFileSync("./dist/composer.json", "{}");
+    fs.writeFileSync("./dist/Procfile", "web: node ./build/src/runtime/server.js");
 
+    copy("./build/examples.js", "./dist/build/examples.js", tracker.track("copy packaged examples"));
+ 
     for(let pattern of ["build/src/**/*.js", "build/src/**/*.js.map", "build/scripts/**/*.js", "build/scripts/**/*.js.map", 
                         "src/**/*.css", "css/**/*.css", "examples/**/*.*", "fonts/**/*.*", "package.json"]) {
       let matches = glob.sync(pattern);
@@ -52,7 +53,7 @@ export function buildExampleDist(callback:() => void) {
 
 if(require.main === module) {
   console.log("Building example distribution folder...")
-  buildExampleDist(() => {
+  buildExampleDist(process.argv[2], () => {
     console.log("done!")
   });
 }
