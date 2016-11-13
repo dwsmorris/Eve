@@ -9,10 +9,7 @@
 			"request": "launch",
 			"name": "Launch Program",
 			"program": "${workspaceRoot}\\build\\src\\runtime\\server.js",
-			"cwd": "${workspaceRoot}",
-			"env": {
-				"EVE_FILE": "/examples/clock.eve"
-			}
+			"cwd": "${workspaceRoot}"
 		},
 		{
 			"type": "node",

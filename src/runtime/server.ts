@@ -9,6 +9,7 @@ import * as ws from "ws";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as minimist from "minimist";
+require("dotenv").config();
 
 import {ActionImplementations} from "./actions";
 import {PersistedDatabase} from "./databases/persisted";
