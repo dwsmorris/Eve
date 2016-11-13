@@ -115,7 +115,8 @@ function initWebsocket(wss) {
       let data = JSON.parse(message);
       if(data.type === "init") {
         let {url, hash} = data;
-        let path = hash !== "" ? hash : url;
+        console.log(process.env.EVE_FILE);
+        let path = process.env.EVE_FILE || (hash !== "" ? hash : url);
         console.log("PATH", path)
         fs.stat("." + path, (err, stats) => {
           if(err || !stats.isFile()) {

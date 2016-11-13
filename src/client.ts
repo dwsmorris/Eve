@@ -413,7 +413,7 @@ function initIDE(ide:IDE, client:EveClient) {
     if(documentId.indexOf("/examples/") === -1) {
       url = `${location.pathname}#/examples/${documentId}`;
     }
-    history.pushState({}, "", url + location.search);
+    if (!process.env.EVE_FILE) history.pushState({}, "", url + location.search);
     analyticsEvent("load-document", documentId);
   }
 
@@ -464,6 +464,8 @@ function onHashChange(event) {
       let [k, v] = kv.split('=',2);
       return {id: uuid(), key: k, value: v};
     });
+
+    console.log(JSON.stringify({tag: "url-change", "hash-segment": segments, "query-param": queries}));
 
     client.sendEvent([
       {tag: "url-change", "hash-segment": segments, "query-param": queries}
