@@ -176,7 +176,7 @@ body { justify-content: stretch; }
  * Format Bars
 \****************************************************************************/
 .editor-pane .new-block-bar { position: absolute; top: 0; left: 0; margin-left: -28px; display: flex; flex-direction: row; width: 28px; overflow: hidden; transition: width 0.15s; z-index: 5; color: #666; border-radius:5px; border:1px solid #ddd; font-size:10pt; background:white; }
-.editor-pane .new-block-bar.active { width: 246px; }
+.editor-pane .new-block-bar.active { width: initial; }
 
 
 .editor-pane .new-block-bar > .new-block-bar-toggle,
