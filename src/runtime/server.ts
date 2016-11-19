@@ -34,7 +34,7 @@ const contentTypes = {
 }
 
 const BROWSER = !argv["server"];
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || argv["port"] || 8080;
 const serverDatabase = new ServerDatabase();
 const shared = new PersistedDatabase();
 
@@ -96,6 +96,7 @@ class ServerRuntimeClient extends RuntimeClient {
   constructor(socket:WebSocket, withIDE = true) {
     const dbs = {
       "http": new HttpDatabase(),
+      "server": serverDatabase,
       "shared": shared,
     }
     super(dbs, withIDE);
@@ -133,7 +134,6 @@ function initWebsocket(wss) {
         });
       } else if(data.type === "save"){
         fs.stat("." + path.dirname(data.path), (err, stats) => {
-          console.log(err, stats);
           if(err || !stats.isDirectory()) {
             console.log("trying to save to bad path: " + data.path);
           } else {
@@ -168,5 +168,13 @@ let wss = new WebSocketServer({server: server});
 initWebsocket(wss);
 
 server.listen(PORT, function(){
-  console.log("Server listening on: http://localhost:%s", PORT);
+  console.log(`Eve is available at http://localhost:${PORT}. Point your browser there to access the Eve editor.`);
+});
+
+// If the port is already in use, display an error message
+process.on('uncaughtException', function(err) {
+    if(err.errno === 'EADDRINUSE') {
+      console.log(`ERROR: Eve couldn't start because port ${PORT} is already in use.\n\nYou can select a different port for Eve using the "port" argument.\nFor example:\n\n> npm start -- --port 1234`);
+    }
+    process.exit(1);
 });
