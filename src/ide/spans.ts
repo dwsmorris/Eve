@@ -617,7 +617,7 @@ export class CodeBlockSpan extends BlockSpan {
   protected footerWidgetElem:HTMLElement;
 
   apply(from:Position, to:Position, origin = "+input") {
-    this.lineBackgroundClass = "code";
+    this.lineBackgroundClass = "code" + (this.source.info.toLowerCase() === "css" ? " css" : "");
     this.lineTextClass = "code-text";
     if(this.source.disabled) this.disabled = this.source.disabled;
     else this.disabled = false;
