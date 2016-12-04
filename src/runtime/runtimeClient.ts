@@ -80,7 +80,6 @@ export abstract class RuntimeClient {
     }
 
     this.evaluation = ev;
-
     return ev;
   }
 
